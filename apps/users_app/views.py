@@ -19,7 +19,7 @@ def create(request):
     return redirect('/')
 def edit(request, id):
     context={
-        "users":User.objects.get(id=id)
+        "users":User.objects.get(id=id),
     }
     return render(request,'edit.html', context)
 def delete(request, id):
@@ -32,9 +32,11 @@ def change(request, id):
         for field, message in errors.iteritems():
             error(request, message, extra_tags=field)
         
-        return redirect('/users/{}/edit'.format(user_id))
+        return redirect('/users/?p=%s' % id)
 
-    user_to_update = User.objects.get(id=user_id)
+
+
+    user_to_update = User.objects.get(id=id)
     user_to_update.fullname = request.POST['fullname']
     user_to_update.email = request.POST['email']
     user_to_update.save()

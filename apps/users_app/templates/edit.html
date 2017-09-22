@@ -16,7 +16,7 @@
             {% endfor %}
         </div>
         {% endif %}
-        <form action="/users/{{ user.id }}/change" method="POST">
+        <form action="/{{ user.id }}/change">
             {% csrf_token %}
             <div class="form-group">
                 <label for="first_name">First Name</label>
